@@ -1,0 +1,79 @@
+% ========== 第一章：数学建模基础 ==========
+\documentclass[../main]{subfiles}
+\begin{document}
+
+\section{数学建模概述}
+
+\subsection{什么是数学建模}
+数学建模是运用数学语言、方法和理论，通过抽象、简化建立能近似刻画并"求解"实际问题的一种强有力的数学手段\autocite{giordano2013mathematical}。\highlight{数学建模的核心是将实际问题转化为数学问题}。
+
+\notebox{数学建模的一般步骤：问题分析 → 模型假设 → 模型建立 → 模型求解 → 结果分析 → 模型检验}
+
+\subsection{建模的基本原则}
+数学建模应遵循以下基本原则\autocite{meerschaert2013mathematical}：
+\begin{itemize}
+    \item 目的性原则 - 明确建模目标
+    \item 简化性原则 - 抓住主要矛盾
+        \begin{itemize}
+            \item 忽略次要因素
+            \item 突出关键变量
+        \end{itemize}
+    \item 可行性原则 - 确保模型可解
+\end{itemize}
+
+建模的层次结构：
+\begin{enumerate}[label=(\arabic*)]
+    \item 描述性模型
+    \item 预测性模型
+    \item 决策性模型
+\end{enumerate}
+
+\section{基础数学工具}
+
+\subsection{微分方程模型}
+人口增长的Logistic模型最初由Verhulst提出\autocite{verhulst1838notice}：
+\begin{equation}\label{eq:logistic}
+    \frac{dN}{dt} = rN\left(1-\frac{N}{K}\right)
+\end{equation}
+
+其中$N(t)$表示时刻$t$的人口数量，$r$为内禀增长率，$K$为环境容量。
+
+该方程的解为：
+\begin{align}
+    N(t) &= \frac{K}{1 + \left(\frac{K}{N_0} - 1\right)e^{-rt}} \label{eq:logistic_solution}
+\end{align}
+
+引用公式：Logistic模型如公式\cref{eq:logistic}所示。
+
+\subsection{优化理论基础}
+
+\begin{definition}[凸函数]
+设函数$f(x)$定义在凸集$D$上，若对任意$x_1, x_2 \in D$和$\lambda \in [0,1]$，都有：
+$$f(\lambda x_1 + (1-\lambda)x_2) \leq \lambda f(x_1) + (1-\lambda)f(x_2)$$
+则称$f(x)$为凸函数。
+\end{definition}
+
+凸优化理论为许多实际问题提供了强有力的工具\autocite{boyd2004convex}。
+
+\begin{theorem}[KKT条件]
+对于约束优化问题：
+\begin{align}
+    \min \quad & f(x) \\
+    \text{s.t.} \quad & g_i(x) \leq 0, \quad i = 1,2,\ldots,m \\
+    & h_j(x) = 0, \quad j = 1,2,\ldots,l
+\end{align}
+若$x^*$为最优解，则存在拉格朗日乘子$\lambda_i \geq 0$和$\mu_j$，使得KKT条件成立\autocite{karush1939minima}。
+\end{theorem}
+
+\begin{example}
+考虑简单的线性规划问题：
+\begin{align}
+    \max \quad & 3x_1 + 2x_2 \\
+    \text{s.t.} \quad & x_1 + x_2 \leq 4 \\
+    & 2x_1 + x_2 \leq 6 \\
+    & x_1, x_2 \geq 0
+\end{align}
+通过图解法可得最优解为$(2, 2)$，最优值为$10$。线性规划的详细理论可参考\textcite{luenberger2008linear}。
+\end{example}
+
+\end{document} 

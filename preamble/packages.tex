@@ -1,0 +1,64 @@
+% ========== LaTeX 包导入文件 ==========
+% 本文件包含所有需要的宏包导入
+
+% --- 页面与版式 ---
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{microtype}
+\usepackage{setspace}      % 行距控制
+
+% --- 图形与表格 ---
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{longtable}     % 跨页表格
+\usepackage{array}         % 增强表格功能
+
+% --- 数学与符号 ---
+\usepackage{amsmath}
+\usepackage{amsthm}        % 定理环境
+\usepackage{amssymb}       % 数学符号
+\usepackage{mathtools}     % 数学工具增强
+\usepackage{siunitx}
+\usepackage{gensymb}
+
+% --- 算法与流程图 ---
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{tikz}          % 绘图包
+\usetikzlibrary{shapes,arrows,positioning,calc}
+
+% --- 数据可视化 ---
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% --- 代码与文本处理 ---
+\usepackage[cache=false]{minted}
+\usepackage{listings}
+\usepackage{seqsplit}
+\usepackage[hyphens]{url}
+\usepackage{xurl}
+
+% --- 链接与引用 ---
+\usepackage[colorlinks,bookmarksopen,bookmarksnumbered,breaklinks=true]{hyperref}
+\usepackage{cleveref}
+\usepackage[
+    backend=biber,
+    style=gb7714-2015,
+    citestyle=numeric-comp,
+    sorting=ynt,
+    hyperref=true,
+    backref=false
+]{biblatex}
+
+% --- 特殊包 ---
+\usepackage{enumitem}      % 列表自定义
+\usepackage{caption}       % 标题自定义
+\usepackage{footnote}      % 脚注增强
+\usepackage{appendix}      % 附录管理
+\usepackage{subfiles}      % 子文件支持
+\usepackage{calc}          % 计算支持 

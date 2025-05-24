@@ -1,0 +1,38 @@
+% ========== LaTeX 主文件 ==========
+\documentclass[12pt]{ctexart}
+
+% 导入包和设置
+\input{preamble/packages}
+\input{preamble/settings}
+
+% 导入个人配置
+\input{config}
+
+\begin{document}
+
+% ========== 封面页 ==========
+\subfile{content/cover}
+
+% ========== 目录 ==========
+\renewcommand{\contentsname}{目录}
+\pagenumbering{roman}
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\hypersetup{linkcolor=red}
+
+% ========== 正文内容 ==========
+\subfile{content/chapterD1}
+\subfile{content/chapterD2}
+% \subfile{content/template/template}
+% \subfile{content/chapter1}
+% \subfile{content/chapter2}
+% \subfile{content/chapter3}
+% ...
+
+% ========== 参考文献列表 ==========
+\newpage
+\printbibliography
+
+\end{document} 

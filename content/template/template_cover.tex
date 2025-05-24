@@ -1,0 +1,28 @@
+% ========== 封面页 ==========
+\documentclass[../main]{subfiles}
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \includegraphics[width=9cm]{figure/badge.pdf}
+    \\[0.5cm]\textbf{\Large{\templatetype}}
+    \\[1cm]\textbf{\huge{\maintitle}}\\[1cm]
+    \begin{minipage}{11.1cm}
+        \centering
+        \begin{flushleft} \Large
+            {\hbadness=10000
+            \makebox[3cm][s]{\textbf{学院：}}\dlmu[8cm]{\school}\\[0.3cm]
+            \makebox[3cm][s]{\textbf{年级专业：}}\dlmu[8cm]{\major}\\[0.3cm]
+            \makebox[3cm][s]{\textbf{课程：}}\dlmu[8cm]{\course}\\[0.3cm]
+            \makebox[3cm][s]{\textbf{指导老师：}}\dlmu[8cm]{\teacher}\\[0.3cm]
+            \makebox[3cm][s]{\textbf{报告编号：}}\dlmu[8cm]{\expnumber}\\[0.3cm]
+            \makebox[3cm][s]{\textbf{小组成员：}}\dlmu[8cm]{\name}\\[0.3cm]
+            \makebox[3cm][s]{\textbf{学号：}}\dlmu[8cm]{\id}\\[0.3cm]
+            \makebox[3cm][s]{\textbf{日期：}}\dlmu[8cm]{\customdate}\\[0.3cm]
+            }
+        \end{flushleft}
+    \end{minipage}
+    \newpage
+\end{titlepage}
+
+\end{document} 

@@ -1,0 +1,151 @@
+% ========== LaTeX 格式设置文件 ==========
+% 本文件包含所有格式设置、样式定义和自定义命令
+
+% ========== 文档格式设置 ==========
+\setlength{\parindent}{2em}
+\geometry{left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm,headsep=1.2cm}
+\pagestyle{fancy}
+\setlength{\headheight}{33pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% 行距设置（可根据需要调整）
+\onehalfspacing
+
+% ========== 定理环境设置 ==========
+\theoremstyle{definition}
+\newtheorem{definition}{定义}[section]
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{corollary}{推论}[section]
+\newtheorem{example}{例}[section]
+\newtheorem{remark}{注}[section]
+
+% ========== 样式设置 ==========
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=green,urlcolor=blue}
+
+% 颜色定义
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+\definecolor{commentcolor}{rgb}{0.0,0.5,0.0}
+\definecolor{keywordcolor}{rgb}{0.0,0.0,0.8}
+\definecolor{stringcolor}{rgb}{0.8,0.0,0.0}
+
+% Minted 设置
+\setminted{
+    bgcolor=codebg,
+    linenos,
+    breaklines,
+    breakanywhere,
+    fontsize=\small,
+    frame=single,
+    framesep=2mm
+}
+
+% Listings 包配置
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    commentstyle=\color{commentcolor}\itshape,
+    escapeinside={\%*}{*)},
+    extendedchars=true,
+    frame=single,
+    keepspaces=true,
+    keywordstyle=\color{keywordcolor}\bfseries,
+    language=Python,
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\tiny\color{gray},
+    rulecolor=\color{black},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    stepnumber=1,
+    stringstyle=\color{stringcolor},
+    tabsize=4,
+    title=\lstname,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    xleftmargin=2em,
+    framexleftmargin=1.5em
+}
+
+% JavaScript 语言定义
+\lstdefinelanguage{JavaScript}{
+    keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with, const, let, class, export, import, async, await},
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]',
+    morestring=[b]",
+    morestring=[b]`,
+    ndkeywords={class, export, boolean, throw, implements, import, this},
+    keywordstyle=\color{keywordcolor}\bfseries,
+    ndkeywordstyle=\color{purple}\bfseries,
+    identifierstyle=\color{black},
+    commentstyle=\color{commentcolor}\ttfamily,
+    stringstyle=\color{stringcolor}\ttfamily,
+    sensitive=true
+}
+
+% 算法环境设置
+\SetAlgorithmName{算法}{算法}{算法列表}
+\SetKwProg{Fn}{函数}{：}{结束}
+\SetKwFunction{FMain}{主函数}
+
+% 图表标题格式
+\captionsetup{
+    font={small,bf},
+    labelfont=bf,
+    textfont=rm,
+    justification=centering
+}
+
+% 列表格式优化
+\setlist[itemize]{leftmargin=2em,itemsep=0.5ex}
+\setlist[enumerate]{leftmargin=2em,itemsep=0.5ex}
+
+% ========== 自定义命令 ==========
+% 高亮文本
+\newcommand{\highlight}[1]{\colorbox{yellow}{#1}}
+
+% 注意事项框
+\newcommand{\notebox}[1]{%
+    \begin{center}
+    \fcolorbox{red}{yellow!20}{%
+        \parbox{0.9\textwidth}{%
+            \textbf{注意：}#1
+        }
+    }
+    \end{center}
+}
+
+% 快速插入图片的命令
+\newcommand{\insertfig}[4][0.8]{%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=#1\textwidth]{#2}
+        \caption{#3}
+        \label{#4}
+    \end{figure}
+}
+
+% 快速插入代码文件
+\newcommand{\inputcode}[3][python]{%
+    \begin{listing}[H]
+        \inputminted{#1}{#2}
+        \caption{#3}
+    \end{listing}
+}
+
+% 自定义带下划线的表单项命令
+\makeatletter
+\newcommand\dlmu[2][4cm]{%
+  \sbox0{#2}%
+  \ifdim\wd0>#1\relax
+    \hskip1pt\underline{\hb@xt@ #1{\hss\resizebox*{#1}{!}{\mbox{#2}}\hss}}\hskip3pt%
+  \else
+    \hskip1pt\underline{\hb@xt@ #1{\hss#2\hss}}\hskip3pt%
+  \fi
+}
+\makeatother 

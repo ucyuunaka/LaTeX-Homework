@@ -1,0 +1,35 @@
+% ========== 个人配置文件 ==========
+% 本文件包含所有可自定义的个人信息和文档设置
+
+% ========== 个人信息设置 ==========
+\newcommand{\school}{您的学院}
+\newcommand{\major}{您的年级专业}
+\newcommand{\righthead}{页眉标题}
+\newcommand{\maintitle}{文档标题}
+\newcommand{\course}{课程名称}
+\newcommand{\teacher}{指导教师}
+\newcommand{\expnumber}{报告编号}
+\newcommand{\name}{姓名1、姓名2、姓名3}
+\newcommand{\id}{学号1、学号2、学号3}
+\newcommand{\customdate}{2025年12月20日}
+
+% ========== 模板类型选择 ==========
+% 取消注释对应行来选择不同的模板类型
+% \newcommand{\templatetype}{实验报告}
+% \newcommand{\templatetype}{课程作业}
+% \newcommand{\templatetype}{课程设计}
+\newcommand{\templatetype}{学术论文}
+
+% ========== 页眉页脚设置 ==========
+\lhead{\includegraphics[width=34.7mm]{figure/badge-horizonal.pdf}}
+\rhead{\righthead}
+\cfoot{\thepage}
+
+% ========== 参考文献设置 ==========
+\addbibresource{main.bib}
+
+% ========== 其他自定义设置 ==========
+% 如果需要修改某些格式参数，可以在这里覆盖默认设置
+% 例如：
+% \geometry{left=3cm,right=3cm}  % 修改页边距
+% \doublespacing                  % 修改为双倍行距 
