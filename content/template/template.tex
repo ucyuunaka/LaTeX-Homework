@@ -185,13 +185,159 @@ $$3^{10} \equiv 1 \pmod{11}$$
 % ========== 图表与代码 ==========
 \section{图形插入与管理}
 
-图片插入示例：
+本模板提供了多种插入和管理图形的方式，以满足不同场景的需求。
+
+\subsection{基础图片插入}
+最基础的图片插入方式是使用 \texttt{figure} 环境和 \texttt{\textbackslash includegraphics} 命令。这提供了最大的灵活性。
+\begin{figure}[H]
+    \centering % 图片居中
+    \includegraphics[width=0.5\textwidth]{figure/badge-horizonal.pdf}
+    \caption{基础图片插入示例}
+    \label{fig:basic-image}
+\end{figure}
+
+可以交叉引用此图片，例如：图\cref{fig:basic-image}。
+
+\subsection{使用自定义命令 \texttt{\textbackslash insertfig}}
+为了简化操作，模板定义了 \texttt{\textbackslash insertfig} 命令，可以快速插入带标题和标签的居中图片。
+
+\insertfig{figure/badge.pdf}{使用 insertfig 命令插入的图片}{fig:insertfig-command}
+
+这条命令等效于：
+\begin{verbatim}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{figure/badge-horizonal.pdf}
-    \caption{图片标题示例}
-    \label{fig:example}
+    \includegraphics[width=0.8\textwidth]{figure/badge.pdf}
+    \caption{使用 insertfig 命令插入的图片}
+    \label{fig:insertfig-command}
 \end{figure}
+\end{verbatim}
+你也可以指定图片宽度，例如 \texttt{\textbackslash insertfig[0.6]\{...\}} 将设置宽度为页面宽度的60\%。
+
+\subsection{图片参数调整}
+\texttt{\textbackslash includegraphics} 命令支持多种参数来调整图片样式：
+\begin{itemize}
+    \item \texttt{width}: 按宽度缩放，例如 \texttt{width=0.3\textbackslash textwidth}。
+    \item \texttt{height}: 按高度缩放，例如 \texttt{height=4cm}。
+    \item \texttt{scale}: 按比例缩放，例如 \texttt{scale=0.5}。
+    \item \texttt{angle}: 旋转图片，例如 \texttt{angle=45}。
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth, angle=15]{figure/template/2025-05-19 232610.png}
+    \caption{调整宽度并旋转15度的图片}
+    \label{fig:rotated-image}
+\end{figure}
+
+\subsection{并排插入多个图片}
+使用 \texttt{subcaption} 宏包提供的 \texttt{subfigure} 环境，可以方便地将多个图片并排显示，并为它们分别添加子标题。
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/badge.pdf}
+        \caption{第一个子图}
+        \label{fig:subfig-a}
+    \end{subfigure}
+    \hfill % 在子图之间添加一些水平间距
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/badge-horizonal.pdf}
+        \caption{第二个子图}
+        \label{fig:subfig-b}
+    \end{subfigure}
+    \caption{并排显示的两个图片}
+    \label{fig:side-by-side}
+\end{figure}
+
+可以单独引用子图，如 \cref{fig:subfig-a}，也可以引用整个图组，如 \cref{fig:side-by-side}。
+
+\subsection{图片浮动位置控制}
+LaTeX 提供了多种浮动位置参数来控制图片的放置位置：
+\begin{itemize}
+    \item \texttt{[H]}: 强制在当前位置（需要 float 宏包）
+    \item \texttt{[htbp]}: 依次尝试当前位置、页面顶部、页面底部、单独页面
+    \item \texttt{[!h]}: 忽略一些浮动规则，强制在当前位置
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.3\textwidth]{figure/template/2025-05-27 082408.png}
+    \caption{使用 htbp 浮动位置参数的图片}
+    \label{fig:float-example}
+\end{figure}
+
+\subsection{多图网格布局}
+当需要展示多个相关图片时，可以使用网格布局：
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/badge.pdf}
+        \caption{图A}
+        \label{fig:grid-a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/badge-horizonal.pdf}
+        \caption{图B}
+        \label{fig:grid-b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/template/2025-05-19 232610.png}
+        \caption{图C}
+        \label{fig:grid-c}
+    \end{subfigure}
+    
+    \vspace{0.5cm} % 添加垂直间距
+    
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/template/2025-05-27 082408.png}
+        \caption{图D}
+        \label{fig:grid-d}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/template/20250402171850.png}
+        \caption{图E}
+        \label{fig:grid-e}
+    \end{subfigure}
+    
+    \caption{多图网格布局示例}
+    \label{fig:grid-layout}
+\end{figure}
+
+\subsection{图片路径管理}
+本模板的图片建议按以下结构组织：
+\begin{itemize}
+    \item \texttt{figure/} - 主要图片目录
+    \item \texttt{figure/ch1/}, \texttt{figure/ch2/} - 按章节分类
+    \item \texttt{figure/template/} - 模板示例图片
+\end{itemize}
+
+引用时可以使用相对路径：
+\begin{lstlisting}[language=TeX, basicstyle=\ttfamily\small]
+\includegraphics{figure/ch1/diagram.png}
+\includegraphics{figure/template/example.png}
+\end{lstlisting}
+
+\subsection{图片引用与标注}
+使用 \texttt{cleveref} 宏包可以实现智能引用：
+\begin{itemize}
+    \item 单个引用：\cref{fig:basic-image}
+    \item 多个引用：\cref{fig:grid-a,fig:grid-b,fig:grid-c}
+    \item 范围引用：\cref{fig:subfig-a,fig:subfig-b}
+\end{itemize}
+
+引用整个图组：参见\cref{fig:grid-layout}展示了多种图片的网格布局效果。
 
 \section{表格设计与制作}
 
@@ -350,7 +496,7 @@ very_long_variable_name_example = "这是一个非常长长长长长长长长长
 文本式引用：\textcite{knuth1986texbook}详细介绍了TeX系统。
 
 \subsection{交叉引用示例}
-智能交叉引用：参见\cref{fig:example,tab:booktabs,eq:gravity}。
+智能交叉引用：参见\cref{fig:basic-image,tab:booktabs,eq:gravity}。
 
 参考算法：\cref{alg:quicksort}展示了快速排序的实现。
 
