@@ -1,0 +1,213 @@
+% =============================================================================
+%                    MYLAB_STYLE - 自定义 LaTeX 样式包
+% =============================================================================
+
+\ProvidesPackage{mylab_style}[2025/07/04 ucyuunaka]
+
+\RequirePackage{kvoptions}
+\RequirePackage{scrlfile}
+
+% =============================================================================
+% 1. 宏包导入
+% =============================================================================
+
+% --- 页面与版式 ---
+\RequirePackage{geometry} 
+\RequirePackage{fancyhdr} 
+\RequirePackage{microtype} 
+\RequirePackage{setspace}      % 行距控制 
+
+% --- 图形与表格 ---
+\RequirePackage{graphicx} 
+\RequirePackage{booktabs} 
+\RequirePackage[table]{xcolor} 
+\RequirePackage{tabularx} 
+\RequirePackage{multirow} 
+\RequirePackage{makecell} 
+\RequirePackage{subcaption} 
+\RequirePackage{float} 
+\RequirePackage{longtable}     % 跨页表格 
+\RequirePackage{array}         % 增强表格功能 
+
+% --- 数学与符号 ---
+\RequirePackage{amsmath} 
+\RequirePackage{amsthm}        % 定理环境 
+\RequirePackage{amssymb}       % 数学符号 
+\RequirePackage{mathtools}     % 数学工具增强 
+\RequirePackage{siunitx} 
+\RequirePackage{gensymb} 
+
+% --- 算法与流程图 ---
+\RequirePackage[ruled,vlined,linesnumbered]{algorithm2e} 
+\RequirePackage{tikz}          % 绘图包 
+\usetikzlibrary{shapes,arrows,positioning,calc} 
+
+% --- 数据可视化 ---
+\RequirePackage{pgfplots} 
+\pgfplotsset{compat=1.18} 
+
+% --- 代码与文本处理 ---
+\RequirePackage[cache=false]{minted} 
+\RequirePackage{listings} 
+\RequirePackage{seqsplit} 
+\RequirePackage[hyphens]{url} 
+\RequirePackage{xurl} 
+
+% --- 链接与引用 ---
+\RequirePackage[colorlinks,bookmarksopen,bookmarksnumbered,breaklinks=true]{hyperref} 
+\RequirePackage{cleveref} 
+\RequirePackage[
+    backend=biber,
+    style=gb7714-2015,
+    citestyle=numeric-comp,
+    sorting=ynt,
+    hyperref=true, 
+    backref=false
+]{biblatex} 
+
+% --- 特殊包 ---
+\RequirePackage{enumitem}      % 列表自定义 
+\RequirePackage{caption}       % 标题自定义 
+\RequirePackage{footnote}      % 脚注增强 
+\RequirePackage{appendix}      % 附录管理 
+\RequirePackage{subfiles}      % 子文件支持 
+\RequirePackage{calc}          % 计算支持 
+
+% =============================================================================
+% 2. 格式与样式设置
+% =============================================================================
+
+% ========== 文档格式设置 ==========
+\setlength{\parindent}{2em} 
+\geometry{left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm,headsep=1.2cm} 
+\pagestyle{fancy} 
+\setlength{\headheight}{33pt} 
+\renewcommand{\headrulewidth}{0.4pt} 
+\renewcommand{\footrulewidth}{0pt} 
+\onehalfspacing 
+
+% ========== 定理环境设置 ==========
+\theoremstyle{definition} 
+\newtheorem{definition}{定义}[section] 
+\newtheorem{theorem}{定理}[section] 
+\newtheorem{lemma}{引理}[section] 
+\newtheorem{corollary}{推论}[section] 
+\newtheorem{example}{例}[section] 
+\newtheorem{remark}{注}[section] 
+
+% ========== 样式设置 ==========
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=green,urlcolor=blue} 
+
+\definecolor{codebg}{rgb}{0.95,0.95,0.95} 
+\definecolor{commentcolor}{rgb}{0.0,0.5,0.0} 
+\definecolor{keywordcolor}{rgb}{0.0,0.0,0.8} 
+\definecolor{stringcolor}{rgb}{0.8,0.0,0.0} 
+
+\setminted{
+    bgcolor=codebg,
+    linenos,
+    breaklines,
+    breakanywhere,
+    fontsize=\small,
+    frame=single,
+    framesep=2mm
+} 
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    commentstyle=\color{commentcolor}\itshape,
+    escapeinside={\%*}{*)},
+    extendedchars=true,
+    frame=single,
+    keepspaces=true,
+    keywordstyle=\color{keywordcolor}\bfseries,
+    language=Python,
+    numbers=left, 
+    numbersep=5pt, 
+    numberstyle=\tiny\color{gray}, 
+    rulecolor=\color{black}, 
+    showspaces=false, 
+    showstringspaces=false, 
+    showtabs=false, 
+    stepnumber=1, 
+    stringstyle=\color{stringcolor}, 
+    tabsize=4, 
+    title=\lstname, 
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}, 
+    xleftmargin=2em, 
+    framexleftmargin=1.5em 
+}
+
+\lstdefinelanguage{JavaScript}{
+    keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with, const, let, class, export, import, async, await}, 
+    morecomment=[l]{//}, 
+    morecomment=[s]{/*}{*/}, 
+    morestring=[b]', 
+    morestring=[b]", 
+    morestring=[b]`, 
+    ndkeywords={class, export, boolean, throw, implements, import, this}, 
+    keywordstyle=\color{keywordcolor}\bfseries, 
+    ndkeywordstyle=\color{purple}\bfseries, 
+    identifierstyle=\color{black}, 
+    commentstyle=\color{commentcolor}\ttfamily, 
+    stringstyle=\color{stringcolor}\ttfamily, 
+    sensitive=true 
+}
+
+\SetAlgorithmName{算法}{算法}{算法列表} 
+\SetKwProg{Fn}{函数}{：}{结束} 
+\SetKwFunction{FMain}{主函数} 
+
+\captionsetup{
+    font={small,bf},
+    labelfont=bf,
+    textfont=rm,
+    justification=centering
+} 
+
+\setlist[itemize]{leftmargin=2em,itemsep=0.5ex} 
+\setlist[enumerate]{leftmargin=2em,itemsep=0.5ex} 
+
+% ========== 自定义命令 ==========
+\newcommand{\highlight}[1]{\colorbox{yellow}{#1}} 
+
+\newcommand{\notebox}[1]{% 
+    \begin{center} 
+    \fcolorbox{red}{yellow!20}{% 
+        \parbox{0.9\textwidth}{% 
+            \textbf{注意：}#1 
+        } 
+    } 
+    \end{center} 
+}
+
+\newcommand{\insertfig}[4][0.8]{% 
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width=#1\textwidth]{#2} 
+        \caption{#3} 
+        \label{#4} 
+    \end{figure} 
+}
+
+\newcommand{\inputcode}[3][python]{% 
+    \begin{listing}[H] 
+        \inputminted{#1}{#2} 
+        \caption{#3} 
+    \end{listing} 
+}
+
+\makeatletter 
+\newcommand\dlmu[2][4cm]{% 
+  \sbox0{#2}% 
+  \ifdim\wd0>#1\relax 
+    \hskip1pt\underline{\hb@xt@ #1{\hss\resizebox*{#1}{!}{\mbox{#2}}\hss}}\hskip3pt% 
+  \else 
+    \hskip1pt\underline{\hb@xt@ #1{\hss#2\hss}}\hskip3pt% 
+  \fi 
+}
+\makeatother 
