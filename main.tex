@@ -25,13 +25,22 @@
 \subfile{content/cover} 
 
 % ========== 目录 ==========
-\renewcommand{\contentsname}{目录} 
-\pagenumbering{roman} 
-\thispagestyle{empty} 
-\tableofcontents 
-\newpage 
-\pagenumbering{arabic} 
-\hypersetup{linkcolor=red} 
+\renewcommand{\contentsname}{目录}
+\pagenumbering{roman}
+\thispagestyle{empty}
+% 双列布局下将目录设置为单列并独立成页
+\ifthenelse{\equal{\documentlayout}{double}}{%
+    \onecolumn
+    \tableofcontents
+    \clearpage
+    \pagenumbering{arabic}
+    \twocolumn
+}{%
+    \tableofcontents
+    \newpage
+    \pagenumbering{arabic}
+}
+\hypersetup{linkcolor=red}
 
 % ========== 正文内容 ==========
 % \subfile{content/chapterD1} 
@@ -43,7 +52,14 @@
 % ...
 
 % ========== 参考文献列表 ==========
-\newpage 
-\printbibliography 
+% 双列布局下将参考文献设置为单列并独立成页
+\ifthenelse{\equal{\documentlayout}{double}}{%
+    \clearpage
+    \onecolumn
+    \printbibliography
+}{%
+    \newpage
+    \printbibliography
+}
 
 \end{document}
