@@ -8,25 +8,25 @@ set filename=%filename:.tex=%
 
 if not exist build mkdir build
 
-echo [Build] ¿ªÊ¼±àÒë %filename%.tex ...
+echo [Build] å¼€å§‹ç¼–è¯‘ %filename%.tex ...
 latexmk -pdf -xelatex -shell-escape -outdir=build -auxdir=build -interaction=nonstopmode -synctex=1 %filename%.tex
 
 if %errorlevel% neq 0 (
-    echo [Build] ±àÒëÊ§°Ü£¬´íÎó´úÂë: %errorlevel%
+    echo [Build] ç¼–è¯‘å¤±è´¥ï¼Œé”™è¯¯ä»£ç : %errorlevel%
     exit /b %errorlevel%
 )
 
 if exist build\%filename%.pdf (
     copy build\%filename%.pdf %filename%.pdf >nul
     if %errorlevel% equ 0 (
-        echo [Build] ±àÒë³É¹¦£¡PDF ÒÑÉú³É: %filename%.pdf
+        echo [Build] ç¼–è¯‘æˆåŠŸï¼ŒPDF å·²ç”Ÿæˆ: %filename%.pdf
     ) else (
-        echo [Build] PDF ¸´ÖÆÊ§°Ü
+        echo [Build] PDF å¤åˆ¶å¤±è´¥
         exit /b 1
     )
 ) else (
-    echo [Build] ±àÒëÊ§°Ü£¬Î´ÕÒµ½ PDF ÎÄ¼ş
+    echo [Build] ç¼–è¯‘å¤±è´¥ï¼Œæœªæ‰¾åˆ° PDF æ–‡ä»¶
     exit /b 1
 )
 
-REM ²»Ê¹ÓÃ pause£¬ÈÃ TexStudio ¿ÉÒÔÕı³£½áÊø 
+REM ä¸ä½¿ç”¨ pauseï¼Œé¿å… TexStudio ä¸­æ–­ç¼–è¯‘æµç¨‹
