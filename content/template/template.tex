@@ -379,32 +379,23 @@ LaTeX 提供了多种浮动位置参数来控制图片的放置位置：
 
 \subsection{长表格示例}
 
-\begin{longtable}{|l|c|c|r|}
-\caption{长表格示例 - 学生成绩统计} \label{tab:longtable} \\
-\hline
-\textbf{姓名} & \textbf{数学} & \textbf{物理} & \textbf{总分} \\
-\hline
-\endfirsthead
-
-\multicolumn{4}{c}%
-{{\bfseries 表格续前页}} \\
-\hline
-\textbf{姓名} & \textbf{数学} & \textbf{物理} & \textbf{总分} \\
-\hline
-\endhead
-
-\hline \multicolumn{4}{|r|}{{续下页}} \\ \hline
-\endfoot
-
-\hline
-\endlastfoot
-
-张三 & 95 & 88 & 183 \\
-李四 & 87 & 92 & 179 \\
-王五 & 91 & 85 & 176 \\
-赵六 & 89 & 90 & 179 \\
-钱七 & 93 & 87 & 180 \\
-\end{longtable}
+% 双栏布局下将长表格改为普通表格以避免兼容性问题
+\begin{table}[H]
+    \centering
+    \caption{学生成绩统计表（双栏兼容版本）}
+    \label{tab:grades-twocolumn}
+    \begin{tabularx}{\linewidth}{|l|X|X|r|}
+        \hline
+        \textbf{姓名} & \textbf{数学} & \textbf{物理} & \textbf{总分} \\
+        \hline
+        张三 & 95 & 88 & 183 \\
+        李四 & 87 & 92 & 179 \\
+        王五 & 91 & 85 & 176 \\
+        赵六 & 89 & 90 & 179 \\
+        钱七 & 93 & 87 & 180 \\
+        \hline
+    \end{tabularx}
+\end{table}
 
 \subsection{算法复杂度分析}
 

@@ -48,9 +48,14 @@
 
 % --- 跨栏浮动体设置 ---
 % 跨栏图片和表格的默认设置
+% 注意：在某些情况下这些命令可能未定义，需要条件检查
 \makeatletter
-\renewcommand{\fps@figure*}{!tb}        % 跨栏图片：top, bottom（不允许here）
-\renewcommand{\fps@table*}{!tb}         % 跨栏表格：top, bottom（不允许here）
+\@ifundefined{fps@figure*}{}{%
+    \renewcommand{\fps@figure*}{!tb}        % 跨栏图片：top, bottom（不允许here）
+}
+\@ifundefined{fps@table*}{}{%
+    \renewcommand{\fps@table*}{!tb}         % 跨栏表格：top, bottom（不允许here）
+}
 \makeatother
 
 % --- 浮动体间距调整 ---

@@ -138,7 +138,7 @@
 
 % --- 段落感知的栏平衡 ---
 % 避免在段落中间进行栏平衡
-\newcommand{\paragraphaware@balance}{%
+\newcommand{\paragraphawarebalance}{%
     \par
     \vspace{0pt plus 1fil}
     \balance
@@ -221,11 +221,13 @@
 
 % --- 章节级栏平衡 ---
 % 在每个章节开始时重置栏平衡
-\let\orig@section\section
-\renewcommand{\section}[1]{%
-    \balance
-    \orig@section{#1}
-}
+% 注意：为避免与已加载包的冲突，暂时禁用自动章节栏平衡
+% 用户可手动调用 \balancecolumns 命令进行栏平衡
+% \let\orig@section\section
+% \renewcommand{\section}[1]{%
+%     \balance
+%     \orig@section{#1}
+% }
 
 % --- 文档结束时的栏平衡 ---
 \AtEndDocument{%

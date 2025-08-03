@@ -20,3 +20,4 @@ build/
 *.pyg 
 main.pdf
 .claude.json
+LaTeX_Architecture_Test_Report.md
