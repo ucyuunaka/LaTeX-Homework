@@ -27,4 +27,184 @@
 % - 建议配合 balance.tex 一起调试
 % =============================================================================
 
-% 此文件将在后续迁移过程中填充具体的双栏浮动体配置内容
+% ========== 双栏浮动体参数设置 ==========
+
+% --- 浮动体放置策略 ---
+% 设置浮动体的默认放置参数
+\renewcommand{\topfraction}{0.9}        % 页面顶部浮动体最大占比
+\renewcommand{\bottomfraction}{0.8}     % 页面底部浮动体最大占比
+\renewcommand{\textfraction}{0.1}       % 页面文本最小占比
+\renewcommand{\floatpagefraction}{0.8}  % 浮动页浮动体最小占比
+\setcounter{topnumber}{3}               % 页面顶部最多浮动体数量
+\setcounter{bottomnumber}{2}            % 页面底部最多浮动体数量
+\setcounter{totalnumber}{4}             % 每页最多浮动体总数
+
+% --- 双栏内浮动体设置 ---
+% 图片默认浮动策略：就近放置
+\makeatletter
+\renewcommand{\fps@figure}{!htb}        % 图片浮动顺序：强制here, top, bottom
+\renewcommand{\fps@table}{!htb}         % 表格浮动顺序：强制here, top, bottom
+\makeatother
+
+% --- 跨栏浮动体设置 ---
+% 跨栏图片和表格的默认设置
+\makeatletter
+\renewcommand{\fps@figure*}{!tb}        % 跨栏图片：top, bottom（不允许here）
+\renewcommand{\fps@table*}{!tb}         % 跨栏表格：top, bottom（不允许here）
+\makeatother
+
+% --- 浮动体间距调整 ---
+% 浮动体与文本之间的间距（双栏布局需要更紧凑）
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}        % 同一页面浮动体间距
+\setlength{\textfloatsep}{12pt plus 2pt minus 4pt}   % 浮动体与文本间距
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}       % 文中浮动体间距
+\setlength{\dblfloatsep}{8pt plus 2pt minus 2pt}     % 跨栏浮动体间距
+\setlength{\dbltextfloatsep}{12pt plus 2pt minus 4pt} % 跨栏浮动体与文本间距
+
+% ========== 浮动体环境优化 ==========
+
+% --- 双栏内小图片环境 ---
+\newcommand{\insertfigsmall}[4][0.7]{%
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[width=#1\columnwidth]{#2}
+        \caption{#3}
+        \label{#4}
+    \end{figure}
+}
+
+% --- 双栏内紧凑表格环境 ---
+\newcommand{\inserttablecompact}[3]{%
+    \begin{table}[!htb]
+        \centering
+        \footnotesize  % 使用小字体
+        #1
+        \caption{#2}
+        \label{#3}
+    \end{table}
+}
+
+% --- 跨栏大表格环境 ---
+\newcommand{\inserttablewide}[3]{%
+    \begin{table*}[!tb]
+        \centering
+        \small  % 使用小字体
+        #1
+        \caption{#2}
+        \label{#3}
+    \end{table*}
+}
+
+% --- 并排子图环境（双栏内） ---
+\newcommand{\insertsubfigs}[9][0.45]{%
+    \begin{figure}[!htb]
+        \centering
+        \begin{subfigure}{#1\columnwidth}
+            \centering
+            \includegraphics[width=\textwidth]{#2}
+            \caption{#3}
+            \label{#4}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{#1\columnwidth}
+            \centering
+            \includegraphics[width=\textwidth]{#5}
+            \caption{#6}
+            \label{#7}
+        \end{subfigure}
+        \caption{#8}
+        \label{#9}
+    \end{figure}
+}
+
+% ========== 浮动体排版优化 ==========
+
+% --- 图表标题格式 ---
+% 双栏布局中的标题格式调整
+\captionsetup[figure]{
+    font=footnotesize,
+    labelfont=bf,
+    textfont=rm,
+    justification=centering,
+    singlelinecheck=false,
+    skip=6pt
+}
+
+\captionsetup[table]{
+    font=footnotesize,
+    labelfont=bf,
+    textfont=rm,
+    justification=centering,
+    singlelinecheck=false,
+    skip=6pt
+}
+
+% --- 跨栏图表标题格式 ---
+\DeclareCaptionStyle{widefigure}{
+    font=small,
+    labelfont=bf,
+    textfont=rm,
+    justification=centering,
+    singlelinecheck=false,
+    skip=8pt
+}
+
+\captionsetup[figure*]{style=widefigure}
+\captionsetup[table*]{style=widefigure}
+
+% ========== 特殊浮动体处理 ==========
+
+% --- 侧边注释框（仅限单栏内） ---
+\newcommand{\sidenotebox}[1]{%
+    \begin{figure}[!htb]
+        \centering
+        \fcolorbox{blue}{blue!10}{%
+            \parbox{0.9\columnwidth}{%
+                \footnotesize
+                \textbf{提示：}#1
+            }
+        }
+    \end{figure}
+}
+
+% --- 算法环境适配双栏 ---
+\floatstyle{ruled}
+\newfloat{algorithm}{!htb}{loa}
+\floatname{algorithm}{算法}
+
+% 双栏算法环境
+\newcommand{\insertalgorithm}[3]{%
+    \begin{algorithm}[!htb]
+        \centering
+        \footnotesize
+        #1
+        \caption{#2}
+        \label{#3}
+    \end{algorithm}
+}
+
+% 跨栏算法环境
+\newfloat{algorithm*}{!tb}{loa}
+\floatname{algorithm*}{算法}
+
+\newcommand{\insertalgorithmwide}[3]{%
+    \begin{algorithm*}[!tb]
+        \centering
+        \small
+        #1
+        \caption{#2}
+        \label{#3}
+    \end{algorithm*}
+}
+
+% ========== 浮动体调试命令 ==========
+% 用于调试浮动体位置的命令
+\newcommand{\showfloatstatus}{%
+    \typeout{当前浮动体状态：}%
+    \typeout{  topnumber: \the\c@topnumber}%
+    \typeout{  bottomnumber: \the\c@bottomnumber}%
+    \typeout{  totalnumber: \the\c@totalnumber}%
+    \typeout{  topfraction: \topfraction}%
+    \typeout{  bottomfraction: \bottomfraction}%
+    \typeout{  textfraction: \textfraction}%
+}

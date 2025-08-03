@@ -1,20 +1,65 @@
 % =============================================================================
-% 通用包导入配置文件
-% Common Package Import Configuration
-% =============================================================================
-% 文件用途：存放所有通用的 LaTeX 宏包导入命令
-% 创建日期：2025-08-03
-% 版本：v1.0
-% 
-% 使用说明：
-% 1. 本文件包含项目中所有通用的宏包导入
-% 2. 在主文档的 preamble 中使用 \input{preamble/common/packages.tex} 引入
-% 3. 按照功能分类组织宏包导入，便于维护和管理
-% 4. 包含详细的注释说明每个宏包的用途
-% 
-% 注意事项：
-% - 此文件应该只包含通用宏包，特定布局的宏包请放在对应的布局配置中
-% - 宏包导入顺序可能影响功能，请谨慎调整
+%                    通用包导入配置 - Common Packages
 % =============================================================================
 
-% 此文件将在后续迁移过程中填充具体的宏包导入内容
+% --- 页面与版式 ---
+\RequirePackage{geometry} 
+\RequirePackage{fancyhdr} 
+\RequirePackage{microtype} 
+\RequirePackage{setspace}      % 行距控制 
+
+% --- 图形与表格 ---
+\RequirePackage{graphicx} 
+\RequirePackage{booktabs} 
+\RequirePackage[table]{xcolor} 
+\RequirePackage{tabularx} 
+\RequirePackage{multirow} 
+\RequirePackage{makecell} 
+\RequirePackage{subcaption} 
+\RequirePackage{float} 
+\RequirePackage{longtable}     % 跨页表格 
+\RequirePackage{array}         % 增强表格功能 
+
+% --- 数学与符号 ---
+\RequirePackage{amsmath} 
+\RequirePackage{amsthm}        % 定理环境 
+\RequirePackage{amssymb}       % 数学符号 
+\RequirePackage{mathtools}     % 数学工具增强 
+\RequirePackage{siunitx} 
+\RequirePackage{gensymb} 
+
+% --- 算法与流程图 ---
+\RequirePackage[ruled,vlined,linesnumbered]{algorithm2e} 
+\RequirePackage{tikz}          % 绘图包 
+\usetikzlibrary{shapes,arrows,positioning,calc} 
+
+% --- 数据可视化 ---
+\RequirePackage{pgfplots} 
+\pgfplotsset{compat=1.18} 
+
+% --- 代码与文本处理 ---
+\RequirePackage[cache=false]{minted} 
+\RequirePackage{listings} 
+\RequirePackage{seqsplit} 
+\RequirePackage[hyphens]{url} 
+\RequirePackage{xurl} 
+
+% --- 链接与引用 ---
+\RequirePackage[colorlinks,bookmarksopen,bookmarksnumbered,breaklinks=true]{hyperref} 
+\RequirePackage{cleveref} 
+\RequirePackage[
+    backend=biber,
+    style=gb7714-2015,
+    citestyle=numeric-comp,
+    sorting=ynt,
+    hyperref=true, 
+    backref=false
+]{biblatex} 
+
+% --- 特殊包 ---
+\RequirePackage{enumitem}      % 列表自定义 
+\RequirePackage{caption}       % 标题自定义 
+\RequirePackage{footnote}      % 脚注增强 
+\RequirePackage{appendix}      % 附录管理 
+\RequirePackage{subfiles}      % 子文件支持 
+\RequirePackage{calc}          % 计算支持

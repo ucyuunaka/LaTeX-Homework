@@ -1,21 +1,130 @@
 % =============================================================================
-% 通用自定义命令配置文件
-% Common Custom Commands Configuration
-% =============================================================================
-% 文件用途：定义项目中所有通用的自定义命令和宏
-% 创建日期：2025-08-03
-% 版本：v1.0
-% 
-% 使用说明：
-% 1. 本文件包含项目中所有通用的自定义命令定义
-% 2. 在主文档的 preamble 中使用 \input{preamble/common/commands.tex} 引入
-% 3. 按照功能分类组织自定义命令，便于查找和维护
-% 4. 每个命令都应包含详细的注释说明用途和使用方法
-% 
-% 注意事项：
-% - 此文件应该只包含通用命令，特定布局的命令请放在对应的布局配置中
-% - 命令名称应具有描述性，避免与现有命令冲突
-% - 复杂命令建议提供使用示例
+%                    通用命令与环境定义 - Common Commands
 % =============================================================================
 
-% 此文件将在后续迁移过程中填充具体的自定义命令内容
+% ========== 定理环境设置 ==========
+\theoremstyle{definition} 
+\newtheorem{definition}{定义}[section] 
+\newtheorem{theorem}{定理}[section] 
+\newtheorem{lemma}{引理}[section] 
+\newtheorem{corollary}{推论}[section] 
+\newtheorem{example}{例}[section] 
+\newtheorem{remark}{注}[section] 
+
+% ========== 链接样式设置 ==========
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=green,urlcolor=blue} 
+
+% ========== 代码样式配置 ==========
+\definecolor{codebg}{rgb}{0.95,0.95,0.95} 
+\definecolor{commentcolor}{rgb}{0.0,0.5,0.0} 
+\definecolor{keywordcolor}{rgb}{0.0,0.0,0.8} 
+\definecolor{stringcolor}{rgb}{0.8,0.0,0.0} 
+
+\setminted{
+    bgcolor=codebg,
+    linenos,
+    breaklines,
+    breakanywhere,
+    fontsize=\small,
+    frame=single,
+    framesep=2mm
+} 
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    commentstyle=\color{commentcolor}\itshape,
+    escapeinside={\%*}{*)},
+    extendedchars=true,
+    frame=single,
+    keepspaces=true,
+    keywordstyle=\color{keywordcolor}\bfseries,
+    language=Python,
+    numbers=left, 
+    numbersep=5pt, 
+    numberstyle=\tiny\color{gray}, 
+    rulecolor=\color{black}, 
+    showspaces=false, 
+    showstringspaces=false, 
+    showtabs=false, 
+    stepnumber=1, 
+    stringstyle=\color{stringcolor}, 
+    tabsize=4, 
+    title=\lstname, 
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}, 
+    xleftmargin=2em, 
+    framexleftmargin=1.5em 
+}
+
+\lstdefinelanguage{JavaScript}{
+    keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with, const, let, class, export, import, async, await}, 
+    morecomment=[l]{//}, 
+    morecomment=[s]{/*}{*/}, 
+    morestring=[b]', 
+    morestring=[b]", 
+    morestring=[b]`, 
+    ndkeywords={class, export, boolean, throw, implements, import, this}, 
+    keywordstyle=\color{keywordcolor}\bfseries, 
+    ndkeywordstyle=\color{purple}\bfseries, 
+    identifierstyle=\color{black}, 
+    commentstyle=\color{commentcolor}\ttfamily, 
+    stringstyle=\color{stringcolor}\ttfamily, 
+    sensitive=true 
+}
+
+\SetAlgorithmName{算法}{算法}{算法列表} 
+\SetKwProg{Fn}{函数}{：}{结束} 
+\SetKwFunction{FMain}{主函数} 
+
+\captionsetup{
+    font={small,bf},
+    labelfont=bf,
+    textfont=rm,
+    justification=centering
+} 
+
+\setlist[itemize]{leftmargin=2em,itemsep=0.5ex} 
+\setlist[enumerate]{leftmargin=2em,itemsep=0.5ex} 
+
+% ========== 自定义命令 ==========
+\newcommand{\highlight}[1]{\colorbox{yellow}{#1}} 
+
+\newcommand{\notebox}[1]{% 
+    \begin{center} 
+    \fcolorbox{red}{yellow!20}{% 
+        \parbox{0.9\textwidth}{% 
+            \textbf{注意：}#1 
+        } 
+    } 
+    \end{center} 
+}
+
+\newcommand{\insertfig}[4][0.8]{% 
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width=#1\textwidth]{#2} 
+        \caption{#3} 
+        \label{#4} 
+    \end{figure} 
+}
+
+\newcommand{\inputcode}[3][python]{% 
+    \begin{listing}[H] 
+        \inputminted{#1}{#2} 
+        \caption{#3} 
+    \end{listing} 
+}
+
+\makeatletter 
+\newcommand\dlmu[2][4cm]{% 
+  \sbox0{#2}% 
+  \ifdim\wd0>#1\relax 
+    \hskip1pt\underline{\hb@xt@ #1{\hss\resizebox*{#1}{!}{\mbox{#2}}\hss}}\hskip3pt% 
+  \else 
+    \hskip1pt\underline{\hb@xt@ #1{\hss#2\hss}}\hskip3pt% 
+  \fi 
+}
+\makeatother

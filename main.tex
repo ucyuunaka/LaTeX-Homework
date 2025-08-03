@@ -1,9 +1,25 @@
 % ========== LaTeX 主文件 ==========
-\documentclass[12pt]{ctexart} 
-\usepackage{preamble/mylab_style}
+% 注意：documentclass 将由布局配置文件重新定义
+% 这里只是为了防止编译错误的占位符定义
+\documentclass[12pt]{article}
 
-% 导入个人配置
-\input{config} 
+% 首先导入个人配置（包含布局选择）
+\input{config}
+
+% 添加条件判断支持
+\usepackage{ifthen}
+
+% ========== 条件加载布局配置 ==========
+% 根据 config.tex 中的 \documentlayout 变量选择对应的布局配置
+\ifthenelse{\equal{\documentlayout}{double}}{%
+    % 双栏布局配置
+    \typeout{Loading double column layout configuration...}
+    \input{preamble/layout_double/settings}
+}{%
+    % 单栏布局配置（默认）
+    \typeout{Loading single column layout configuration...}
+    \input{preamble/layout_single/settings}
+}
 
 \begin{document} 
 

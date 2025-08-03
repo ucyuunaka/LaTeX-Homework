@@ -1,32 +1,126 @@
 % =============================================================================
-% 双栏布局完整配置文件
-% Double Column Layout Complete Configuration
-% =============================================================================
-% 文件用途：双栏布局的完整配置，包含所有相关设置
-% 创建日期：2025-08-03
-% 版本：v1.0
-% 
-% 使用说明：
-% 1. 本文件包含双栏布局所需的所有配置
-% 2. 在主文档的 preamble 中使用 \input{preamble/layout_double/settings.tex} 引入
-% 3. 建议在引入此文件前先引入通用配置文件
-% 4. 此文件是双栏布局的一站式配置解决方案
-% 5. 可配合浮动体和栏平衡配置文件一起使用
-% 
-% 配置内容包括：
-% - 双栏页面尺寸和边距设置
-% - 栏间距和分隔线配置
-% - 字体和行距配置
-% - 段落和列表格式
-% - 基础浮动体设置
-% - 页眉页脚样式
-% - 其他双栏布局专用设置
-% 
-% 注意事项：
-% - 此配置专为双栏布局优化，请勿在单栏文档中使用
-% - 与单栏布局配置互斥，不应同时使用
-% - 复杂浮动体设置请参考 floats.tex 文件
-% - 栏平衡功能请参考 balance.tex 文件
+%                    双栏布局配置 - Double Column Layout
 % =============================================================================
 
-% 此文件将在后续迁移过程中填充具体的双栏布局配置内容
+% ========== 文档类设置 ==========
+\documentclass[9pt,twocolumn]{ctexart}
+
+% ========== 引入通用配置 ==========
+\input{preamble/common/packages}
+\input{preamble/common/commands}
+
+% ========== 双栏布局特定设置 ==========
+
+% --- 页面格式设置 ---
+\setlength{\parindent}{1.5em}  % 双栏布局缩进稍小
+\geometry{
+    left=1.5cm,
+    right=1.5cm,
+    top=2cm,
+    bottom=2cm,
+    headsep=1cm,
+    columnsep=0.8cm  % 栏间距
+} 
+\pagestyle{fancy} 
+\setlength{\headheight}{28pt}  % 双栏布局头部稍小
+\renewcommand{\headrulewidth}{0.4pt} 
+\renewcommand{\footrulewidth}{0pt} 
+\setstretch{1.2}  % 双栏布局行距紧凑
+
+% --- 双栏图片尺寸优化 ---
+% 重新定义 insertfig 命令以适应双栏布局
+\renewcommand{\insertfig}[4][0.9]{%
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width=#1\columnwidth]{#2} 
+        \caption{#3} 
+        \label{#4} 
+    \end{figure} 
+}
+
+% 定义跨栏图片命令
+\newcommand{\insertfigwide}[4][0.8]{%
+    \begin{figure*}[!t] 
+        \centering 
+        \includegraphics[width=#1\textwidth]{#2} 
+        \caption{#3} 
+        \label{#4} 
+    \end{figure*} 
+}
+
+% --- 双栏代码块优化 ---
+% 调整代码块样式以适应双栏
+\setminted{
+    bgcolor=codebg,
+    linenos=false,  % 双栏时关闭行号节省空间
+    breaklines,
+    breakanywhere,
+    fontsize=\footnotesize,  % 字体更小
+    frame=single,
+    framesep=1mm  % 边距更小
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\footnotesize,  % 字体更小
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    commentstyle=\color{commentcolor}\itshape,
+    escapeinside={\%*}{*)},
+    extendedchars=true,
+    frame=single,
+    keepspaces=true,
+    keywordstyle=\color{keywordcolor}\bfseries,
+    language=Python,
+    numbers=none,  % 双栏时关闭行号
+    rulecolor=\color{black}, 
+    showspaces=false, 
+    showstringspaces=false, 
+    showtabs=false, 
+    stepnumber=1, 
+    stringstyle=\color{stringcolor}, 
+    tabsize=4, 
+    title=\lstname, 
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}, 
+    xleftmargin=1em,  % 左边距更小
+    framexleftmargin=0.5em 
+}
+
+% --- 双栏表格优化 ---
+% 调整标题样式以适应双栏
+\captionsetup{
+    font={footnotesize,bf},  % 字体更小
+    labelfont=bf,
+    textfont=rm,
+    justification=centering
+}
+
+% --- 双栏列表优化 ---
+\setlist[itemize]{leftmargin=1.5em,itemsep=0.3ex}  % 间距更紧凑
+\setlist[enumerate]{leftmargin=1.5em,itemsep=0.3ex}
+
+% --- 引入双栏专用模块 ---
+\input{preamble/layout_double/floats}    % 浮动体优化
+\input{preamble/layout_double/balance}   % 栏平衡优化
+
+% --- 双栏专用命令 ---
+% 跨栏注意框
+\newcommand{\noteboxwide}[1]{% 
+    \begin{figure*}[!b]
+    \centering
+    \fcolorbox{red}{yellow!20}{% 
+        \parbox{0.9\textwidth}{% 
+            \textbf{注意：}#1 
+        } 
+    } 
+    \end{figure*}
+}
+
+% 双栏代码输入命令
+\newcommand{\inputcodewide}[3][python]{% 
+    \begin{figure*}[!t] 
+        \inputminted{#1}{#2} 
+        \caption{#3} 
+    \end{figure*}
+}
