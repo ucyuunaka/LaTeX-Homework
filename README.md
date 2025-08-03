@@ -344,6 +344,3 @@ build.bat chapter1
 - **代码高亮**：Python + Pygments
 - **智能编译**：latexmk
 - **编辑器**：TeXstudio 等
-
-> [!NOTE]
-> 遇到问题请先查看故障排除部分，或查阅相关 LaTeX 文档
