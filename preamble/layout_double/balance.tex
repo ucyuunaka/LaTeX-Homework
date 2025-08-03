@@ -3,9 +3,6 @@
 % Column Balance Feature Configuration
 % =============================================================================
 % 文件用途：双栏布局中的栏平衡功能配置
-% 创建日期：2025-08-03
-% 版本：v1.0
-% 
 % 使用说明：
 % 1. 本文件提供双栏布局中的栏平衡功能
 % 2. 在主文档的 preamble 中使用 \input{preamble/layout_double/balance.tex} 引入
@@ -34,7 +31,6 @@
 
 % ========== 栏平衡包导入 ==========
 \usepackage{balance}        % 双栏平衡包
-% \usepackage{multicol}     % 多栏支持包 - 已禁用，避免与 twocolumn 文档类冲突
 
 % ========== 自动栏平衡设置 ==========
 
@@ -216,14 +212,13 @@
 % 在文档开始时设置全局栏平衡策略
 % 注意：禁用文档开始时的自动栏平衡，避免与原生 twocolumn 冲突
 \AtBeginDocument{%
-    % \balance  % 禁用自动栏平衡，改为仅在文档结尾启用
     \typeout{双栏布局栏平衡功能已配置（仅文档结尾生效）}
 }
 
 % --- 章节级栏平衡 ---
 % 在每个章节开始时重置栏平衡
 % 注意：为避免与已加载包的冲突，暂时禁用自动章节栏平衡
-% 用户可手动调用 \balancecolumns 命令进行栏平衡
+% 可手动调用 \balancecolumns 命令进行栏平衡
 % \let\orig@section\section
 % \renewcommand{\section}[1]{%
 %     \balance

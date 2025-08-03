@@ -1,5 +1,4 @@
 # LaTeX 智能编译配置文件
-# 使用方法：latexmk main.tex 或 latexmk -pvc main.tex（持续监视）
 
 # 设置输出目录 - 将辅助文件保存到 build 文件夹
 $out_dir = 'build';
