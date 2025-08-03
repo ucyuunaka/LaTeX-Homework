@@ -92,14 +92,14 @@
 % ========== 自定义命令 ==========
 \newcommand{\highlight}[1]{\colorbox{yellow}{#1}} 
 
-\newcommand{\notebox}[1]{% 
-    \begin{center} 
-    \fcolorbox{red}{yellow!20}{% 
-        \parbox{0.9\textwidth}{% 
-            \textbf{注意：}#1 
-        } 
-    } 
-    \end{center} 
+\newcommand{\notebox}[1]{%
+    \begin{center}
+    \fcolorbox{red}{yellow!20}{%
+        \parbox{\noteboxwidth}{%
+            \textbf{注意：}#1
+        }
+    }
+    \end{center}
 }
 
 \newcommand{\insertfig}[4][0.8]{% 

@@ -43,17 +43,15 @@
 \hypersetup{linkcolor=red}
 
 % ========== 正文内容 ==========
-% \subfile{content/chapterD1} 
-% \subfile{content/chapterD2} 
-\subfile{content/template/template} 
-% \subfile{content/chapter1} 
-% \subfile{content/chapter2} 
-% \subfile{content/chapter3} 
+\subfile{content/chapterD1} 
+\subfile{content/chapterD2} 
+% \subfile{content/template/template} 
 % ...
 
 % ========== 参考文献列表 ==========
 % 双列布局下将参考文献设置为单列并独立成页
 \ifthenelse{\equal{\documentlayout}{double}}{%
+    \balance
     \clearpage
     \onecolumn
     \printbibliography
