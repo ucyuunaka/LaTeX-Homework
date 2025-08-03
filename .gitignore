@@ -21,3 +21,4 @@ build/
 main.pdf
 .claude.json
 LaTeX_Architecture_Test_Report.md
+debug_log.tex
