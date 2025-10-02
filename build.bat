@@ -1,30 +1,30 @@
 @echo off
-set current_dir=%cd%
+setlocal enabledelayedexpansion
 
-set filename=%1
-if "%filename%"=="" set filename=main
+set "filename=%~1"
+if "%filename%"=="" set "filename=main"
 
-set filename=%filename:.tex=%
+set "filename=%filename:.tex=%"
 
 if not exist build mkdir build
 
-echo [Build] ¿ªÊ¼±àÒë %filename%.tex ...
-latexmk -pdf -xelatex -shell-escape -outdir=build -auxdir=build -interaction=nonstopmode -synctex=1 %filename%.tex
+echo [Build] å¼€å§‹æ„å»º %filename%.tex ...
+latexmk -pdf -xelatex -shell-escape -outdir=build -auxdir=build -interaction=nonstopmode -synctex=1 "%filename%.tex"
 
-if %errorlevel% neq 0 (
-    echo [Build] ±àÒëÊ§°Ü£¬´íÎó´úÂë: %errorlevel%
+if errorlevel 1 (
+    echo [Build] æ„å»ºå¤±è´¥ï¼Œé”™è¯¯ç ï¼š%errorlevel%
     exit /b %errorlevel%
 )
 
-if exist build\%filename%.pdf (
-    copy build\%filename%.pdf %filename%.pdf >nul
-    if %errorlevel% equ 0 (
-        echo [Build] ±àÒë³É¹¦£¬PDF ÒÑÉú³É: %filename%.pdf
-    ) else (
-        echo [Build] PDF ¸´ÖÆÊ§°Ü
+if exist "build\%filename%.pdf" (
+    copy "build\%filename%.pdf" "%filename%.pdf" >nul
+    if errorlevel 1 (
+        echo [Build] PDF å¤åˆ¶å¤±è´¥
         exit /b 1
+    ) else (
+        echo [Build] æ„å»ºæˆåŠŸï¼ŒPDF æ–‡ä»¶åä¸ºï¼š%filename%.pdf
     )
 ) else (
-    echo [Build] ±àÒëÊ§°Ü£¬Î´ÕÒµ½ PDF ÎÄ¼ş
+    echo [Build] æ„å»ºå¤±è´¥ï¼Œæœªæ‰¾åˆ° PDF æ–‡ä»¶
     exit /b 1
 )
