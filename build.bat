@@ -8,23 +8,23 @@ set "filename=%filename:.tex=%"
 
 if not exist build mkdir build
 
-echo [Build] å¼€å§‹æ„å»º %filename%.tex ...
+echo [Build] ¿ªÊ¼¹¹½¨ %filename%.tex ...
 latexmk -pdf -xelatex -shell-escape -outdir=build -auxdir=build -interaction=nonstopmode -synctex=1 "%filename%.tex"
 
 if errorlevel 1 (
-    echo [Build] æ„å»ºå¤±è´¥ï¼Œé”™è¯¯ç ï¼š%errorlevel%
+    echo [Build] ¹¹½¨Ê§°Ü£¬´íÎóÂë£º%errorlevel%
     exit /b %errorlevel%
 )
 
 if exist "build\%filename%.pdf" (
     copy "build\%filename%.pdf" "%filename%.pdf" >nul
     if errorlevel 1 (
-        echo [Build] PDF å¤åˆ¶å¤±è´¥
+        echo [Build] PDF ¸´ÖÆÊ§°Ü
         exit /b 1
     ) else (
-        echo [Build] æ„å»ºæˆåŠŸï¼ŒPDF æ–‡ä»¶åä¸ºï¼š%filename%.pdf
+        echo [Build] ¹¹½¨³É¹¦£¬PDF ÎÄ¼şÃûÎª£º%filename%.pdf
     )
 ) else (
-    echo [Build] æ„å»ºå¤±è´¥ï¼Œæœªæ‰¾åˆ° PDF æ–‡ä»¶
+    echo [Build] ¹¹½¨Ê§°Ü£¬Î´ÕÒµ½ PDF ÎÄ¼ş
     exit /b 1
 )
