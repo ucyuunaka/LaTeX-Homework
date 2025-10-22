@@ -379,6 +379,7 @@ notifications/spec.md
 - Single-file implementations until proven insufficient
 - Avoid frameworks without clear justification
 - Choose boring, proven patterns
+- Do not over-engineer compatibility unless explicitly required: Avoid over-designing for scenarios without clear requirements; keep the system concise and efficient
 
 ### Complexity Triggers
 Only add complexity with:
